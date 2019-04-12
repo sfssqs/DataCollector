@@ -21,9 +21,8 @@ def get_image_path_list(dir_path, *suffix):
     return path_array
 
 
-def show_image(image_data):
-    cv2.imshow("image", image_data)
-    cv2.waitKey(0)
+def show_image(image_name, image_data):
+    cv2.imshow(image_name, image_data)
 
 
 def cutout_faces(src_path, tag_path, invalid_path, *suffix):
@@ -61,13 +60,25 @@ def cutout_faces(src_path, tag_path, invalid_path, *suffix):
                             list_str = [str(int(time.time())), str(count)]
                             file_name = ''.join(list_str)
 
-                            face_x1 = x - w / 4
-                            face_x2 = face_x1 + w + w / 2
-                            face_y1 = y
-                            face_y2 = face_y1 + h
+                            '''第一种情况，宽图像'''
+                            # face_x1 = x - w / 4
+                            # face_x2 = face_x1 + w + w / 2
+                            # face_y1 = y
+                            # face_y2 = face_y1 + h
 
-                            cutout_face = image[face_y1:face_y2, face_x1:face_x2];
-                            show_image(cutout_face)
+                            '''第二种情况，正方形图像'''
+                            face_x1 = int(x - w / 4)
+                            face_x2 = int(face_x1 + w + w / 2)
+                            face_y1 = int(y - w / 4)
+                            face_y2 = int(face_y1 + w + w / 2)
+
+                            cutout_face = image[face_y1:face_y2, face_x1:face_x2]
+                            face_224_224 = cv2.resize(cutout_face, (224, 224))
+
+                            cv2.imshow("original", image)
+                            cv2.imshow("cutout", cutout_face)
+                            cv2.imshow("target", face_224_224)
+                            cv2.waitKey(0)
 
                             # f = cv2.resize(image[face_y:face_h, face_x:face_w], (face_w - face_h, face_h - face_y))
                             # show_image(image[face_y:face_h, face_x:face_w])
