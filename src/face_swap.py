@@ -41,7 +41,7 @@ import numpy
 
 import sys
 
-PREDICTOR_PATH = "/Users/xiaxing/PycharmProjects/FaceCutout/src/shape_predictor_68_face_landmarks.dat"
+PREDICTOR_PATH = "shape_predictor_68_face_landmarks.dat"
 SCALE_FACTOR = 1
 FEATHER_AMOUNT = 11
 
@@ -203,8 +203,8 @@ def correct_colours(im1, im2, landmarks1):
 # im2, landmarks2 = read_im_and_landmarks(sys.argv[2])
 
 
-im1, landmarks1 = read_im_and_landmarks("/Users/xiaxing/PycharmProjects/FaceCutout/data/swap/A.jpeg")
-im2, landmarks2 = read_im_and_landmarks("/Users/xiaxing/PycharmProjects/FaceCutout/data/swap/B.jpeg")
+im1, landmarks1 = read_im_and_landmarks("../data/swap/A.jpeg")
+im2, landmarks2 = read_im_and_landmarks("../data/swap/B.jpeg")
 
 
 M = transformation_from_points(landmarks1[ALIGN_POINTS],
